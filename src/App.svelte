@@ -1,29 +1,14 @@
 <script lang="ts">
+    import Layout from "./components/Layout.svelte";
 </script>
 
 <main>
     <div class="root">
-        <div class="background">
-            <div class="background-hero"></div>
-            <div class="background-layout"></div>
-        </div>
+        <Layout>
+            adjkhajkd haskjd haskjdh ask hdajsk hdksahdkjhjk
+        </Layout>
     </div>
 </main>
 
 <style>
-    .root {
-        position: relative;
-    }
-    
-    .background-hero {
-        background: var(--bg-hero);
-        object-fit: contain;
-        width: 100%;
-        height: 40dvh;
-    }
-
-    .background-layout {
-        height: 60dvh;
-        background-color: var(--bg-layout);
-    }
 </style>
