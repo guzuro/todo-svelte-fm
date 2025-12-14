@@ -1,11 +1,12 @@
 <script lang="ts">
     import Layout from "./components/Layout.svelte";
+    import Todo from "./components/Todo.svelte";
 </script>
 
 <main>
     <div class="root">
         <Layout>
-            adjkhajkd haskjd haskjdh ask hdajsk hdksahdkjhjk
+            <Todo />
         </Layout>
     </div>
 </main>
