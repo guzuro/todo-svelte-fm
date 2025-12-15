@@ -27,7 +27,9 @@
           title="toggle todo state"
         />
 
-        {todo.value}
+        <span class={[todo.completed && "todo-value_completed"]}>
+          {todo.value}
+        </span>
         <button class="todo-remove" onclick={() => removeTodo(i)}>X</button>
       </li>
     {/each}
@@ -56,6 +58,11 @@
 
   .todo-item:last-child {
     border-bottom: unset;
+  }
+
+  .todo-value_completed {
+    text-decoration: line-through;
+    opacity: 0.4;
   }
 
   .todo-remove {
