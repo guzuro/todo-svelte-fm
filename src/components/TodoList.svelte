@@ -4,14 +4,31 @@
   const {
     todos,
     removeTodo,
-  }: { todos: ITodo[]; removeTodo: (idx: number) => void } = $props();
+    toggleTodoActive,
+  }: {
+    todos: ITodo[];
+    removeTodo: (idx: number) => void;
+    toggleTodoActive: (idx: number) => void;
+  } = $props();
 </script>
 
 <div class="todo-list">
   <ul class="todo-inner">
     {#each todos as todo, i}
-      <li class="todo-item" onclick={() => removeTodo(i)}>
-        {todo.value} <button class="todo-remove">X</button>
+      <li class="todo-item">
+        <button
+          class={[
+            "todo-check-button",
+            todo.completed
+              ? "todo-check-button_active"
+              : "todo-check-button_unactive",
+          ]}
+          onclick={() => toggleTodoActive(i)}
+          title="toggle todo state"
+        />
+
+        {todo.value}
+        <button class="todo-remove" onclick={() => removeTodo(i)}>X</button>
       </li>
     {/each}
   </ul>
@@ -43,5 +60,43 @@
 
   .todo-remove {
     margin-left: auto;
+  }
+
+  .todo-check-button {
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    border: 1px var(--border-color) solid;
+    margin-right: 10px;
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+  }
+
+  .todo-check-button_unactive {
+    background-color: var(--bg-card);
+  }
+
+  .todo-check-button_active {
+    background-color: unset;
+    background: var(--check-gradient);
+    position: relative;
+
+    &:before {
+      content: "";
+
+      background-image: url("/icons/icon-check.svg");
+      background-repeat: no-repeat;
+      background-position: center;
+
+      position: absolute;
+      top: 50%;
+      right: 50%;
+      transform: translate(50%, -50%);
+      width: 10px;
+      height: 10px;
+    }
   }
 </style>

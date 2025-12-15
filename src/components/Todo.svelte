@@ -24,6 +24,14 @@
   const handleRemoveTodo = (idx: number) => {
     todos = todos.filter((t, index) => index !== idx);
   };
+
+  const handleToggleTodoActive = (idx: number) => {
+    const todo = todos.find((t, id) => id === idx);
+
+    if (todo) {
+      todo.completed = !todo.completed;
+    }
+  };
 </script>
 
 <div class="todo">
@@ -40,7 +48,11 @@
     />
 
     {#if todos.length}
-      <TodoList {todos} removeTodo={handleRemoveTodo} />
+      <TodoList
+        {todos}
+        removeTodo={handleRemoveTodo}
+        toggleTodoActive={handleToggleTodoActive}
+      />
     {/if}
   </div>
 </div>
