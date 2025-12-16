@@ -18,6 +18,7 @@
       <li class="todo-item">
         <button
           class={[
+            "button",
             "todo-check-button",
             todo.completed
               ? "todo-check-button_active"
@@ -30,7 +31,10 @@
         <span class={[todo.completed && "todo-value_completed"]}>
           {todo.value}
         </span>
-        <button class="todo-remove" onclick={() => removeTodo(i)}>X</button>
+        <button
+          class="button todo-remove-button"
+          onclick={() => removeTodo(i)}
+        />
       </li>
     {/each}
   </ul>
@@ -53,7 +57,7 @@
 
     padding: 15px 20px;
     color: var(--text-primary);
-    border-bottom: 1px black solid;
+    border-bottom: 1px var(--text-primary) solid;
   }
 
   .todo-item:last-child {
@@ -65,36 +69,14 @@
     opacity: 0.4;
   }
 
-  .todo-remove {
-    margin-left: auto;
-  }
-
-  .todo-check-button {
+  .button {
     height: 20px;
     width: 20px;
-    border-radius: 50%;
-    border: 1px var(--border-color) solid;
-    margin-right: 10px;
-
-    &:hover {
-      cursor: pointer;
-      opacity: 0.7;
-    }
-  }
-
-  .todo-check-button_unactive {
-    background-color: var(--bg-card);
-  }
-
-  .todo-check-button_active {
-    background-color: unset;
-    background: var(--check-gradient);
     position: relative;
 
     &:before {
       content: "";
 
-      background-image: url("/icons/icon-check.svg");
       background-repeat: no-repeat;
       background-position: center;
 
@@ -104,6 +86,41 @@
       transform: translate(50%, -50%);
       width: 10px;
       height: 10px;
+    }
+
+    &:hover {
+      cursor: pointer;
+      opacity: 0.7;
+    }
+  }
+
+  .todo-check-button {
+    border-radius: 50%;
+    border: 1px var(--border-color) solid;
+    margin-right: 10px;
+  }
+
+  .todo-check-button_unactive {
+    background-color: var(--bg-card);
+  }
+
+  .todo-check-button_active {
+    background-color: unset;
+    background: var(--check-gradient);
+
+    &:before {
+      background-image: url("/icons/icon-check.svg");
+    }
+  }
+
+  .todo-remove-button {
+    margin-left: auto;
+    background-color: transparent;
+    color: var(--text-primary);
+    border: unset;
+
+    &:before {
+      background-image: url("/icons/icon-cross.svg");
     }
   }
 </style>
