@@ -15,9 +15,11 @@
     }
 
     if (params.code === "Enter") {
-      todos.push(newTodo);
+      if (newTodo.value.trim()) {
+        todos.push(newTodo);
 
-      newTodo = { ...getDefaultTodo() };
+        newTodo = { ...getDefaultTodo() };
+      }
     }
   };
 
