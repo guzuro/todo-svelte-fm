@@ -28,7 +28,10 @@
           title="toggle todo state"
         />
 
-        <span class={["todo-value", todo.completed && "todo-value_completed"]}>
+        <span
+          title={todo.value}
+          class={["todo-value", todo.completed && "todo-value_completed"]}
+        >
           {todo.value}
         </span>
         <button
@@ -54,6 +57,7 @@
   .todo-item {
     display: flex;
     align-items: center;
+    gap: 5px;
 
     padding: 15px 20px;
     color: var(--text-primary);
