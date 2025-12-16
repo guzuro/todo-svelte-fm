@@ -28,7 +28,7 @@
           title="toggle todo state"
         />
 
-        <span class={[todo.completed && "todo-value_completed"]}>
+        <span class={["todo-value", todo.completed && "todo-value_completed"]}>
           {todo.value}
         </span>
         <button
@@ -62,6 +62,12 @@
 
   .todo-item:last-child {
     border-bottom: unset;
+  }
+
+  .todo-value {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .todo-value_completed {
