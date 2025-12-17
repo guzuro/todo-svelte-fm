@@ -5,16 +5,42 @@
     todos,
     removeTodo,
     toggleTodoActive,
+    clearCompleted,
   }: {
     todos: ITodo[];
     removeTodo: (idx: number) => void;
     toggleTodoActive: (idx: number) => void;
+    clearCompleted: () => void;
   } = $props();
+
+  const uncompletedTodosLeft = $derived.by(
+    () => todos.filter((t) => !t.completed).length
+  );
+
+  let filterType = $state<null | "active" | "completed">(null);
+
+  const changeFilter = (filter: typeof filterType) => {
+    if (filter === filterType) {
+      filterType = null;
+    } else {
+      filterType = filter;
+    }
+  };
+
+  const filteredTodos = $derived.by(() => {
+    if (filterType === "active") {
+      return todos.filter((t) => !t.completed);
+    } else if (filterType === "completed") {
+      return todos.filter((t) => t.completed);
+    } else {
+      return todos;
+    }
+  });
 </script>
 
 <div class="todo-list">
   <ul class="todo-inner">
-    {#each todos as todo, i}
+    {#each filteredTodos as todo, i}
       <li class="todo-item">
         <button
           class={[
@@ -41,14 +67,43 @@
       </li>
     {/each}
   </ul>
+
+  <div class="todo-list-footer">
+    <span>
+      {uncompletedTodosLeft} items left
+    </span>
+
+    <div class="filters">
+      <button
+        class={[filterType === null ? "filter-active" : ""]}
+        onclick={() => changeFilter(null)}
+      >
+        All
+      </button>
+      <button
+        class={[filterType === "active" ? "filter-active" : ""]}
+        onclick={() => changeFilter("active")}
+      >
+        Active
+      </button>
+      <button
+        class={[filterType === "completed" ? "filter-active" : ""]}
+        onclick={() => changeFilter("completed")}
+      >
+        Completed
+      </button>
+    </div>
+
+    <div>
+      <button onclick={clearCompleted}>Clear completed</button>
+    </div>
+  </div>
 </div>
 
 <style>
   .todo-list {
     margin-top: 25px;
-  }
 
-  .todo-inner {
     background-color: var(--bg-card);
     border-radius: var(--border-radius);
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
@@ -131,6 +186,32 @@
 
     &:before {
       background-image: url("/icons/icon-cross.svg");
+    }
+  }
+
+  .todo-list-footer {
+    border-top: 2px var(--border-color) solid;
+    padding: 20px;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .todo-list-footer {
+    button {
+      background-color: transparent;
+      border: unset;
+      color: var(--text-primary);
+
+      &:hover {
+        color: var(--text-secondary);
+        cursor: pointer;
+      }
+    }
+
+    .filter-active {
+      color: var(--blue-500);
     }
   }
 </style>

@@ -34,6 +34,10 @@
       todo.completed = !todo.completed;
     }
   };
+
+  const clearCompleted = () => {
+    todos = todos.filter((t) => !t.completed);
+  };
 </script>
 
 <div class="todo">
@@ -54,6 +58,7 @@
         {todos}
         removeTodo={handleRemoveTodo}
         toggleTodoActive={handleToggleTodoActive}
+        {clearCompleted}
       />
     {/if}
   </div>
@@ -78,6 +83,7 @@
 
     h1 {
       font-size: 28px;
+      color: white;
     }
   }
 
