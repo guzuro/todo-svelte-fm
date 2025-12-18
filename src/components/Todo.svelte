@@ -50,6 +50,7 @@
       type="text"
       class="todo-input"
       bind:value={newTodo.value}
+      placeholder="Create a new todo..."
       onkeydown={handleKeyDown}
     />
 
