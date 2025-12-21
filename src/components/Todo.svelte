@@ -1,6 +1,7 @@
 <script lang="ts">
   import { getDefaultTodo } from "../todo.factory";
   import type { ITodo } from "../types";
+  import { getCurrentTheme, themeState, toggleTheme } from "../utils/theme";
   import TodoList from "./TodoList.svelte";
 
   let todos = $state<ITodo[]>([]);
@@ -44,6 +45,14 @@
   <div class="todo-inner">
     <div class="todo-header">
       <h1>TODO</h1>
+
+      <a class="theme-toggle" onclick={toggleTheme}>
+        {#if $themeState === "dark"}
+          <img src="/icons/icon-sun.svg" />
+        {:else}
+          <img src="/icons/icon-moon.svg" />
+        {/if}
+      </a>
     </div>
 
     <input
@@ -76,11 +85,20 @@
     margin: 0 auto;
   }
 
+  .theme-toggle {
+    cursor: pointer;
+
+    &:hover {
+      opacity: 0.75;
+    }
+  }
+
   .todo-header {
     margin-bottom: 10px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    justify-content: space-between;
 
     h1 {
       font-size: 28px;
