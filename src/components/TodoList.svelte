@@ -20,7 +20,7 @@
     () => todos.filter((t) => !t.completed).length
   );
 
-  let filterType = $state<ListFilter>(null);
+  let filterType = $state<ListFilter>('all');
 
   const filteredTodos = $derived.by(() => {
     if (filterType === "active") {

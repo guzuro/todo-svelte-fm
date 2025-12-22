@@ -3,4 +3,4 @@ export interface ITodo {
     completed: boolean
 }
 
-export type ListFilter = null | "active" | "completed"
+export type ListFilter = "all" | "active" | "completed"
