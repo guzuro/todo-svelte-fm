@@ -20,7 +20,7 @@
     () => todos.filter((t) => !t.completed).length
   );
 
-  let filterType = $state<ListFilter>('all');
+  let filterType = $state<ListFilter>("all");
 
   const filteredTodos = $derived.by(() => {
     if (filterType === "active") {
@@ -38,21 +38,24 @@
 <svelte:window bind:innerWidth />
 
 <div class="todo-list">
-  <div class="todo-list-inner">
+  <div class="card">
     <ul class="">
       {#each filteredTodos as todo, i}
         <li class="todo-item">
           <button
             class={[
               "button",
-              "todo-check-button",
-              todo.completed
-                ? "todo-check-button_active"
-                : "todo-check-button_unactive",
+              "button-icon",
+              "button-check",
+              todo.completed && "button-check_active",
             ]}
             onclick={() => toggleTodoActive(i)}
             title="toggle todo state"
-          />
+          >
+            {#if todo.completed}
+              <span class="icon icon-check" />
+            {/if}
+          </button>
 
           <span
             title={todo.value}
@@ -61,14 +64,16 @@
             {todo.value}
           </span>
           <button
-            class="button todo-remove-button"
+            class="button button-icon button-remove"
             onclick={() => removeTodo(i)}
-          />
+          >
+            <span class="icon icon-remove" />
+          </button>
         </li>
       {/each}
     </ul>
 
-    <div class="todo-list-footer todo-list-footer-desktop">
+    <div class="footer">
       <span class="todo-list-footer-count">
         {uncompletedTodosLeft} items left
       </span>
@@ -80,14 +85,14 @@
         />
       {/if}
 
-      <div>
-        <button onclick={clearCompleted}>Clear completed</button>
-      </div>
+      <button class="button-clear-completed" onclick={clearCompleted}
+        >Clear completed</button
+      >
     </div>
   </div>
 
   {#if isMobile}
-    <div class="todo-list-footer todo-list-footer-mobile">
+    <div class="card footer footer-mobile">
       <Filters {filterType} updateFilter={(filter) => (filterType = filter)} />
     </div>
   {/if}
@@ -98,10 +103,10 @@
     margin-top: 25px;
   }
 
-  .todo-list-inner {
+  .card {
+    padding: 15px;
     background-color: var(--bg-card);
     border-radius: var(--border-radius);
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
 
   .todo-item {
@@ -109,13 +114,9 @@
     align-items: center;
     gap: 5px;
 
-    padding: 15px 20px;
+    padding: 15px 0;
     color: var(--text-primary);
     border-bottom: 1px var(--text-primary) solid;
-  }
-
-  .todo-item:last-child {
-    border-bottom: unset;
   }
 
   .todo-value {
@@ -130,89 +131,81 @@
   }
 
   .button {
-    height: 20px;
-    width: 20px;
     position: relative;
-
-    &:before {
-      content: "";
-
-      background-repeat: no-repeat;
-      background-position: center;
-
-      position: absolute;
-      top: 50%;
-      right: 50%;
-      transform: translate(50%, -50%);
-      width: 10px;
-      height: 10px;
-    }
+    width: 20px;
+    height: 20px;
+    padding: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
 
     &:hover {
-      cursor: pointer;
       opacity: 0.7;
     }
   }
 
-  .todo-check-button {
+  .button-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .button-check {
     border-radius: 50%;
     border: 1px var(--border-color) solid;
     margin-right: 10px;
-  }
-
-  .todo-check-button_unactive {
     background-color: var(--bg-card);
   }
 
-  .todo-check-button_active {
-    background-color: unset;
+  .button-check_active {
     background: var(--check-gradient);
-
-    &:before {
-      background-image: url("/icons/icon-check.svg");
-    }
   }
 
-  .todo-remove-button {
+  .button-remove {
     margin-left: auto;
-    background-color: transparent;
     color: var(--text-primary);
-    border: unset;
+  }
 
-    &:before {
-      background-image: url("/icons/icon-cross.svg");
+  .icon {
+    width: 12px;
+    height: 12px;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+
+  .icon-check {
+    background-image: url("/icons/icon-check.svg");
+  }
+
+  .icon-remove {
+    background-image: url("/icons/icon-cross.svg");
+  }
+
+  .button-clear-completed {
+    background: unset;
+    border: unset;
+    font-size: 12px;
+
+    &:hover {
+      color: var(--text-secondary);
+      cursor: pointer;
     }
   }
 
-  .todo-list-footer {
+  .footer {
     font-size: 12px;
-    border-top: 2px var(--border-color) solid;
-    padding: 20px;
-    display: flex;
 
+    display: flex;
     justify-content: space-between;
     align-items: center;
 
-    button {
-      font-size: 12px;
-      background-color: transparent;
-      border: unset;
-      color: var(--text-primary);
-
-      &:hover {
-        color: var(--text-secondary);
-        cursor: pointer;
-      }
-    }
+    padding: 15px 0;
   }
 
-  .todo-list-footer-mobile {
+  .footer-mobile {
     display: flex;
     justify-content: center;
 
     margin-top: 10px;
-    background-color: var(--bg-card);
-    border-radius: var(--border-radius);
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   }
 </style>

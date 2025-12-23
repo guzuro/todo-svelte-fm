@@ -1,7 +1,7 @@
 <script lang="ts">
   import { getDefaultTodo } from "../todo.factory";
   import type { ITodo } from "../types";
-  import { getCurrentTheme, themeState, toggleTheme } from "../utils/theme";
+  import ThemeButton from "../ui/ThemeButton.svelte";
   import TodoList from "./TodoList.svelte";
 
   let todos = $state<ITodo[]>([]);
@@ -25,11 +25,11 @@
   };
 
   const handleRemoveTodo = (idx: number) => {
-    todos = todos.filter((t, index) => index !== idx);
+    todos = todos.filter((_, index) => index !== idx);
   };
 
   const handleToggleTodoActive = (idx: number) => {
-    const todo = todos.find((t, id) => id === idx);
+    const todo = todos.find((_, index) => index === idx);
 
     if (todo) {
       todo.completed = !todo.completed;
@@ -46,13 +46,7 @@
     <div class="todo-header">
       <h1>TODO</h1>
 
-      <a class="theme-toggle" onclick={toggleTheme}>
-        {#if $themeState === "dark"}
-          <img src="/icons/icon-sun.svg" />
-        {:else}
-          <img src="/icons/icon-moon.svg" />
-        {/if}
-      </a>
+      <ThemeButton />
     </div>
 
     <input
@@ -83,14 +77,6 @@
     max-width: 450px;
     width: 100%;
     margin: 0 auto;
-  }
-
-  .theme-toggle {
-    cursor: pointer;
-
-    &:hover {
-      opacity: 0.75;
-    }
   }
 
   .todo-header {

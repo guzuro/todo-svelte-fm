@@ -22,8 +22,8 @@
   {#each options as option}
     <button
       class={[
-        "segmented-item",
-        option.value === activeOpt?.value && "segmented-item-active",
+        "segmented-button",
+        option.value === activeOpt?.value && "segmented-button-active",
       ]}
       onclick={() => updateValue(option)}
     >
@@ -36,10 +36,10 @@
   .segmented {
     display: flex;
     flex-wrap: wrap;
-    gap: 5px;
+    gap: 10px;
   }
 
-  .segmented-item {
+  .segmented-button {
     font-size: 12px;
     flex: 1;
     background: none;
@@ -51,7 +51,7 @@
     }
   }
 
-  .segmented-item-active {
+  .segmented-button-active {
     color: var(--blue-500);
   }
 </style>
