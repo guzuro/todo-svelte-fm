@@ -107,6 +107,7 @@
     padding: 15px;
     background-color: var(--bg-card);
     border-radius: var(--border-radius);
+    box-shadow: 6px 10px 30px -3px rgba(34, 60, 80, 0.2);
   }
 
   .todo-item {
@@ -167,10 +168,11 @@
   }
 
   .icon {
-    width: 12px;
-    height: 12px;
+    width: 15px;
+    height: 15px;
     background-repeat: no-repeat;
     background-position: center;
+    background-size: contain;
   }
 
   .icon-check {
@@ -185,6 +187,7 @@
     background: unset;
     border: unset;
     font-size: 12px;
+    color: var(--text-primary);
 
     &:hover {
       color: var(--text-secondary);

@@ -45,7 +45,8 @@
     background: none;
     border: none;
     cursor: pointer;
-
+    color: var(--text-primary);
+    
     &:hover {
       color: var(--text-secondary);
     }
