@@ -11,7 +11,7 @@
 
     --border-color: hsl(233, 11%, 84%);
 
-    --bg-hero: url("/images/bg-desktop-light.jpg");
+    --bg-hero: url("../images/bg-desktop-light.jpg");
 
 
     --border-radius: 10px;
@@ -27,7 +27,7 @@
 
     --border-color: hsl(237, 14%, 26%);
 
-    --bg-hero: url("/images/bg-desktop-dark.jpg")
+    --bg-hero: url("../images/bg-desktop-dark.jpg")
 }
 
 input[type=text] {

@@ -174,11 +174,11 @@
   }
 
   .icon-check {
-    background-image: url("/icons/icon-check.svg");
+    background-image: url("../assets/icons/icon-check.svg");
   }
 
   .icon-remove {
-    background-image: url("/icons/icon-cross.svg");
+    background-image: url("../assets/icons/icon-cross.svg");
   }
 
   .button-clear-completed {

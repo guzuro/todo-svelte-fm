@@ -4,9 +4,9 @@
 
 <button class="theme-toggle-button" title="toggle theme" onclick={toggleTheme}>
   {#if $themeState === "dark"}
-    <img src="/icons/icon-sun.svg" />
+    <img src="../assets/icons/icon-sun.svg" />
   {:else}
-    <img src="/icons/icon-moon.svg" />
+    <img src="../assets/icons/icon-moon.svg" />
   {/if}
 </button>
 
