@@ -11,4 +11,4 @@ Source task is placed in folder **todo-app-main/todo-app-main**
 
 ## Demo:
 
-[https://guzuro.github.io/fm-products-list-with-cart/](https://guzuro.github.io/fm-todo-list-svelte/)
+[https://guzuro.github.io/fm-todo-list-svelte](https://guzuro.github.io/fm-todo-list-svelte)
