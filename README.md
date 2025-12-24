@@ -2,7 +2,7 @@
 
 Challenge from FrontendMentor: **[Todo app](*https://www.frontendmentor.io/challenges/todo-app-Su1_KokOW)**
 
-Source task is placed in folder **todo-app-main/todo-app-main*
+Source task is placed in folder **todo-app-main/todo-app-main**
 
 ## Technologies used:
 
@@ -11,4 +11,4 @@ Source task is placed in folder **todo-app-main/todo-app-main*
 
 ## Demo:
 
-https://guzuro.github.io/fm-products-list-with-cart/
+[https://guzuro.github.io/fm-products-list-with-cart/](https://guzuro.github.io/fm-todo-list-svelte/)
